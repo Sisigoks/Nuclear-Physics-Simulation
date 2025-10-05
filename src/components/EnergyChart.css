@@ -1,0 +1,119 @@
+.energy-chart-container {
+  background: rgba(0, 0, 0, 0.6);
+  border-radius: 15px;
+  padding: 30px;
+  backdrop-filter: blur(10px);
+  border: 2px solid rgba(0, 212, 255, 0.3);
+  height: 100%;
+  overflow-y: auto;
+}
+
+.chart-header {
+  margin-bottom: 25px;
+  padding-bottom: 15px;
+  border-bottom: 2px solid rgba(0, 212, 255, 0.3);
+}
+
+.chart-header h2 {
+  font-size: 1.9rem;
+  color: #00d4ff;
+  font-weight: 700;
+  margin-bottom: 10px;
+}
+
+.chart-subtitle {
+  color: #b0b0b0;
+  font-size: 1.05rem;
+  font-style: italic;
+}
+
+.chart-box-single {
+  background: rgba(0, 0, 0, 0.4);
+  border-radius: 12px;
+  padding: 25px;
+  border: 1px solid rgba(0, 212, 255, 0.2);
+  height: 500px;
+  margin-bottom: 25px;
+}
+
+.chart-explanation {
+  background: rgba(0, 255, 136, 0.08);
+  border-left: 4px solid #00ff88;
+  padding: 20px 25px;
+  border-radius: 10px;
+  margin-top: 20px;
+}
+
+.chart-explanation h3 {
+  color: #00d4ff;
+  margin-bottom: 15px;
+  font-size: 1.2rem;
+  font-weight: 700;
+}
+
+.chart-explanation ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.chart-explanation li {
+  margin: 12px 0;
+  padding-left: 20px;
+  position: relative;
+  color: #d0d0d0;
+  line-height: 1.6;
+  font-size: 0.95rem;
+}
+
+.chart-explanation li::before {
+  content: "▸";
+  position: absolute;
+  left: 0;
+  color: #00ff88;
+  font-weight: bold;
+}
+
+.chart-explanation strong {
+  color: #00d4ff;
+  font-weight: 700;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+  .energy-chart-container {
+    padding: 15px;
+  }
+  
+  .chart-header h2 {
+    font-size: 1.4rem;
+  }
+  
+  .chart-box-single {
+    height: 400px;
+    padding: 15px;
+  }
+  
+  .chart-explanation {
+    padding: 15px;
+  }
+}
+
+/* Scrollbar */
+.energy-chart-container::-webkit-scrollbar {
+  width: 8px;
+}
+
+.energy-chart-container::-webkit-scrollbar-track {
+  background: rgba(0, 0, 0, 0.3);
+  border-radius: 10px;
+}
+
+.energy-chart-container::-webkit-scrollbar-thumb {
+  background: linear-gradient(135deg, #00d4ff, #00ff88);
+  border-radius: 10px;
+}
+
+.energy-chart-container::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(135deg, #00ff88, #00d4ff);
+}
