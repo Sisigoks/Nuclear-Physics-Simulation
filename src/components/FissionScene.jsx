@@ -191,15 +191,7 @@ function FissionSceneContent() {
     });
   }
   
-  const handleBombardNeutron = useCallback(() => {
-    setShowIncomingNeutron(true);
-    
-    setTimeout(() => {
-      handleCollision();
-    }, 2000);
-  }, []);
-  
-  const handleCollision = () => {
+  const handleCollision = useCallback(() => {
     setShowIncomingNeutron(false);
     setShowNucleus(false);
     setShowProducts(true);
@@ -214,7 +206,15 @@ function FissionSceneContent() {
       energy: selectedReaction.energy,
       reaction: `${selectedReaction.fuel} + n → ${selectedReaction.products[0].symbol} + ${selectedReaction.products[1].symbol} + ${selectedReaction.neutronsReleased}n`
     });
-  };
+  }, [recordExperiment, selectedReaction]);
+  
+  const handleBombardNeutron = useCallback(() => {
+    setShowIncomingNeutron(true);
+    
+    setTimeout(() => {
+      handleCollision();
+    }, 2000);
+  }, [handleCollision]);
   
   const handleReset = useCallback(() => {
     setShowNucleus(true);
@@ -225,10 +225,12 @@ function FissionSceneContent() {
   // Make functions available globally
   useEffect(() => {
     window.bombardNeutron = handleBombardNeutron;
+    window.triggerFission = handleBombardNeutron; // Also expose as triggerFission
     window.resetFission = handleReset;
     
     return () => {
       delete window.bombardNeutron;
+      delete window.triggerFission;
       delete window.resetFission;
     };
   }, [handleBombardNeutron, handleReset]);
