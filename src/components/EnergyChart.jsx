@@ -8,7 +8,8 @@ import {
   PointElement,
   Title,
   Tooltip,
-  Legend
+  Legend,
+  ScatterController
 } from 'chart.js';
 import { Line } from 'react-chartjs-2';
 import useSimulationStore from '../store/useSimulationStore';
@@ -22,7 +23,8 @@ ChartJS.register(
   PointElement,
   Title,
   Tooltip,
-  Legend
+  Legend,
+  ScatterController
 );
 
 // Calculate fusion cross-section (parameterized formula)
