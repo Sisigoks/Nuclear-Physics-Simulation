@@ -3,7 +3,7 @@
   "version": "2.0.0",
   "description": "Investigatory Study: Nuclear Fission and Fusion Simulation with React Three Fiber",
   "type": "module",
-  "homepage": "https://github.com/sisigoks/Nuclear-Physics-Simulation",
+  "homepage": "https://sisigoks.github.io/Nuclear-Physics-Simulation/",
   "scripts": {
     "dev": "vite",
     "build": "vite build",
