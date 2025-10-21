@@ -210,11 +210,7 @@ function FissionSceneContent() {
   
   const handleBombardNeutron = useCallback(() => {
     setShowIncomingNeutron(true);
-    
-    setTimeout(() => {
-      handleCollision();
-    }, 2000);
-  }, [handleCollision]);
+  }, []);
   
   const handleReset = useCallback(() => {
     setShowNucleus(true);
