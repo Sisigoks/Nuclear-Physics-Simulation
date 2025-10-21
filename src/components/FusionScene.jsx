@@ -294,18 +294,22 @@ function FusionSceneContent() {
     };
   }, [handleStart, handleAccelerate, handleTriggerFusion, handleReset]);
   
+  const theme = useSimulationStore((state) => state.theme);
+  const textColor = theme === 'dark' ? '#00d4ff' : '#6366f1';
+  const lightIntensity = theme === 'dark' ? 0.7 : 1.2;
+  
   return (
     <>
-      <ambientLight intensity={0.7} />
-      <pointLight position={[10, 10, 10]} intensity={2} />
-      <pointLight position={[-10, 10, -10]} intensity={1} />
-      <pointLight position={[0, -10, 0]} intensity={0.5} color="#00ffff" />
+      <ambientLight intensity={lightIntensity} />
+      <pointLight position={[10, 10, 10]} intensity={theme === 'dark' ? 2 : 1.5} />
+      <pointLight position={[-10, 10, -10]} intensity={theme === 'dark' ? 1 : 0.8} />
+      <pointLight position={[0, -10, 0]} intensity={0.5} color={theme === 'dark' ? "#00ffff" : "#1976d2"} />
       
       {/* Status text */}
       <Text
         position={[0, 6, 0]}
         fontSize={0.5}
-        color="#00d4ff"
+        color={textColor}
         anchorX="center"
         anchorY="middle"
       >
@@ -390,9 +394,13 @@ function FusionSceneContent() {
 }
 
 function FusionScene() {
+  const theme = useSimulationStore((state) => state.theme);
+  const sceneBackground = theme === 'dark' ? '#0a0a1a' : '#f8f9fa';
+  
   return (
-    <div style={{ width: '100%', height: '700px', background: '#0a0a1a', borderRadius: '10px' }}>
+    <div style={{ width: '100%', height: '700px', background: sceneBackground, borderRadius: '10px', transition: 'background 0.3s ease' }}>
       <Canvas camera={{ position: [0, 8, 12], fov: 75 }}>
+        <color attach="background" args={[sceneBackground]} />
         <FusionSceneContent />
       </Canvas>
     </div>

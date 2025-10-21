@@ -5,7 +5,7 @@ import * as THREE from 'three';
 import useSimulationStore from '../store/useSimulationStore';
 
 // Nucleus component - represents an intact atom
-function Nucleus({ position, particles, label, color }) {
+function Nucleus({ position, particles, label, color, textColor }) {
   const groupRef = useRef();
   
   return (
@@ -26,7 +26,7 @@ function Nucleus({ position, particles, label, color }) {
       <Text
         position={[0, -2, 0]}
         fontSize={0.4}
-        color="#00d4ff"
+        color={textColor || "#00d4ff"}
         anchorX="center"
         anchorY="middle"
       >
@@ -231,11 +231,16 @@ function FissionSceneContent() {
     };
   }, [handleBombardNeutron, handleReset]);
   
+  const theme = useSimulationStore((state) => state.theme);
+  const textColor = theme === 'dark' ? '#00d4ff' : '#6366f1';
+  const energyColor = theme === 'dark' ? '#ffd700' : '#8b5cf6';
+  const lightIntensity = theme === 'dark' ? 0.6 : 1.2;
+  
   return (
     <>
-      <ambientLight intensity={0.6} />
-      <pointLight position={[10, 10, 10]} intensity={1.5} />
-      <pointLight position={[-10, -10, -10]} intensity={0.5} />
+      <ambientLight intensity={lightIntensity} />
+      <pointLight position={[10, 10, 10]} intensity={theme === 'dark' ? 1.5 : 1.2} />
+      <pointLight position={[-10, -10, -10]} intensity={theme === 'dark' ? 0.5 : 0.8} />
       
       {/* Initial U-235 Nucleus */}
       {showNucleus && (
@@ -244,6 +249,7 @@ function FissionSceneContent() {
           particles={nucleusParticles}
           label="U-235"
           color="#ff6600"
+          textColor={textColor}
         />
       )}
       
@@ -290,7 +296,7 @@ function FissionSceneContent() {
           <Text
             position={[0, 5, 0]}
             fontSize={0.6}
-            color="#ffd700"
+            color={energyColor}
             anchorX="center"
             anchorY="middle"
           >
@@ -319,9 +325,13 @@ function FissionSceneContent() {
 }
 
 function FissionScene() {
+  const theme = useSimulationStore((state) => state.theme);
+  const sceneBackground = theme === 'dark' ? '#0a0a1a' : '#f8f9fa';
+  
   return (
-    <div style={{ width: '100%', height: '700px', background: '#0a0a1a', borderRadius: '10px' }}>
+    <div style={{ width: '100%', height: '700px', background: sceneBackground, borderRadius: '10px', transition: 'background 0.3s ease' }}>
       <Canvas camera={{ position: [0, 8, 12], fov: 75 }}>
+        <color attach="background" args={[sceneBackground]} />
         <FissionSceneContent />
       </Canvas>
     </div>

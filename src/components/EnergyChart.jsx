@@ -80,6 +80,13 @@ function calculateFissionCrossSection(energy) {
 function EnergyChart() {
   const mode = useSimulationStore((state) => state.mode);
   const experiments = useSimulationStore((state) => state.experiments);
+  const theme = useSimulationStore((state) => state.theme);
+  
+  // Theme-aware colors
+  const textColor = theme === 'dark' ? '#ffffff' : '#0f172a';
+  const titleColor = theme === 'dark' ? '#00d4ff' : '#6366f1';
+  const accentColor = theme === 'dark' ? '#00ff88' : '#8b5cf6';
+  const gridColor = theme === 'dark' ? 'rgba(255, 255, 255, 0.1)' : 'rgba(0, 0, 0, 0.08)';
   
   // Filter experiments by type
   const fissionExperiments = experiments.filter(exp => exp.type === 'fission');
@@ -162,7 +169,7 @@ function EnergyChart() {
       legend: {
         position: 'top',
         labels: { 
-          color: '#ffffff', 
+          color: textColor, 
           font: { size: 13, weight: 'bold' },
           usePointStyle: true,
           padding: 15
@@ -171,7 +178,7 @@ function EnergyChart() {
       title: {
         display: true,
         text: 'Fusion Reaction Cross-Sections vs Energy',
-        color: '#00d4ff',
+        color: titleColor,
         font: { size: 18, weight: 'bold' },
         padding: 20
       },
@@ -189,32 +196,32 @@ function EnergyChart() {
         title: { 
           display: true, 
           text: 'Cross-section σ in m²', 
-          color: '#00ff88', 
+          color: accentColor, 
           font: { size: 14, weight: 'bold' }
         },
         ticks: { 
-          color: '#ffffff',
+          color: textColor,
           callback: function(value) {
             return value.toExponential(0);
           }
         },
-        grid: { color: 'rgba(255, 255, 255, 0.1)' }
+        grid: { color: gridColor }
       },
       x: {
         type: 'logarithmic',
         title: { 
           display: true, 
           text: 'Center of Mass Energy in keV', 
-          color: '#00ff88', 
+          color: accentColor, 
           font: { size: 14, weight: 'bold' }
         },
         ticks: { 
-          color: '#ffffff',
+          color: textColor,
           callback: function(value) {
             return value;
           }
         },
-        grid: { color: 'rgba(255, 255, 255, 0.1)' }
+        grid: { color: gridColor }
       }
     }
   };
@@ -276,7 +283,7 @@ function EnergyChart() {
       legend: {
         position: 'top',
         labels: { 
-          color: '#ffffff', 
+          color: textColor, 
           font: { size: 13, weight: 'bold' },
           usePointStyle: true,
           padding: 15
@@ -285,7 +292,7 @@ function EnergyChart() {
       title: {
         display: true,
         text: 'U-235 Fission Cross-Section vs Neutron Energy',
-        color: '#00d4ff',
+        color: titleColor,
         font: { size: 18, weight: 'bold' },
         padding: 20
       },
@@ -303,16 +310,16 @@ function EnergyChart() {
         title: { 
           display: true, 
           text: 'Cross-section σ in barns', 
-          color: '#00ff88', 
+          color: accentColor, 
           font: { size: 14, weight: 'bold' }
         },
         ticks: { 
-          color: '#ffffff',
+          color: textColor,
           callback: function(value) {
             return value.toFixed(0);
           }
         },
-        grid: { color: 'rgba(255, 255, 255, 0.1)' },
+        grid: { color: gridColor },
         min: 0.1,
         max: 1000
       },
@@ -321,16 +328,16 @@ function EnergyChart() {
         title: { 
           display: true, 
           text: 'Neutron Energy in eV', 
-          color: '#00ff88', 
+          color: accentColor, 
           font: { size: 14, weight: 'bold' }
         },
         ticks: { 
-          color: '#ffffff',
+          color: textColor,
           callback: function(value) {
             return value.toFixed(2);
           }
         },
-        grid: { color: 'rgba(255, 255, 255, 0.1)' }
+        grid: { color: gridColor }
       }
     }
   };

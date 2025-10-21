@@ -21,6 +21,7 @@ const useSimulationStore = create((set, get) => ({
   // Simulation control
   isPaused: false,
   speed: 2.0,
+  theme: 'dark', // 'dark' or 'light'
   
   // Data tracking
   experiments: [],
@@ -50,6 +51,8 @@ const useSimulationStore = create((set, get) => ({
   togglePause: () => set((state) => ({ isPaused: !state.isPaused })),
   
   setSpeed: (speed) => set({ speed }),
+  
+  toggleTheme: () => set((state) => ({ theme: state.theme === 'dark' ? 'light' : 'dark' })),
   
   recordExperiment: (data) => set((state) => ({
     experiments: [...state.experiments, {

@@ -6,10 +6,11 @@
 
 body {
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  background: linear-gradient(135deg, #0f0c29, #302b63, #24243e);
-  color: #ffffff;
+  background: var(--bg-primary);
+  color: var(--text-primary);
   min-height: 100vh;
   overflow-x: hidden;
+  transition: background 0.3s ease, color 0.3s ease;
 }
 
 .app {
@@ -19,28 +20,52 @@ body {
 
 .app-header {
   text-align: center;
-  padding: 30px 0;
-  background: rgba(0, 0, 0, 0.4);
-  border-radius: 15px;
-  margin-bottom: 20px;
-  backdrop-filter: blur(10px);
-  border: 2px solid rgba(0, 212, 255, 0.3);
+  padding: 35px 20px;
+  background: var(--bg-tertiary);
+  border-radius: 20px;
+  margin-bottom: 25px;
+  backdrop-filter: blur(15px);
+  border: 2px solid var(--border-primary);
+  box-shadow: var(--shadow-primary);
+  position: relative;
+  overflow: hidden;
+}
+
+.app-header::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -50%;
+  width: 200%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, var(--bg-hover), transparent);
+  animation: shimmer 3s infinite;
+}
+
+@keyframes shimmer {
+  0% { transform: translateX(-100%); }
+  100% { transform: translateX(100%); }
 }
 
 .app-header h1 {
-  font-size: 2.8rem;
-  background: linear-gradient(45deg, #00d4ff, #00ff88);
+  font-size: 3rem;
+  background: var(--accent-gradient);
   background-clip: text;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
-  margin-bottom: 10px;
+  margin-bottom: 12px;
   font-weight: 800;
+  position: relative;
+  z-index: 1;
+  letter-spacing: -0.5px;
 }
 
 .app-header p {
-  color: #b0b0b0;
-  font-size: 1.2rem;
+  color: var(--text-secondary);
+  font-size: 1.25rem;
   font-weight: 500;
+  position: relative;
+  z-index: 1;
 }
 
 .main-layout {
@@ -51,12 +76,18 @@ body {
 }
 
 .scene-container {
-  background: rgba(0, 0, 0, 0.5);
-  border-radius: 15px;
+  background: var(--bg-card);
+  border-radius: 20px;
   overflow: hidden;
-  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.6);
-  border: 2px solid rgba(0, 212, 255, 0.3);
+  box-shadow: var(--shadow-primary);
+  border: 2px solid var(--border-primary);
   min-height: 700px;
+  transition: all 0.3s ease;
+}
+
+.scene-container:hover {
+  box-shadow: var(--shadow-card);
+  transform: translateY(-2px);
 }
 
 .analysis-data-layout {
@@ -66,6 +97,48 @@ body {
   margin-bottom: 20px;
 }
 
+.theme-toggle-btn {
+  position: fixed;
+  top: 24px;
+  right: 24px;
+  width: 52px;
+  height: 52px;
+  padding: 0;
+  background: var(--glass-bg);
+  border: 2px solid var(--border-accent);
+  border-radius: 50%;
+  color: var(--accent-primary);
+  font-size: 1.3rem;
+  cursor: pointer;
+  backdrop-filter: blur(15px);
+  box-shadow: var(--shadow-card);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.theme-toggle-btn:hover {
+  background: var(--accent-primary);
+  color: white;
+  transform: translateY(-3px) rotate(15deg);
+  box-shadow: 0 10px 30px rgba(99, 102, 241, 0.3);
+  border-color: var(--accent-primary);
+}
+
+.theme-toggle-btn:active {
+  transform: translateY(-1px) rotate(15deg) scale(0.95);
+}
+
+.theme-toggle-btn i {
+  transition: transform 0.3s ease;
+}
+
+.theme-toggle-btn:hover i {
+  transform: scale(1.1);
+}
+
 @media (max-width: 1200px) {
   .main-layout {
     grid-template-columns: 1fr;
@@ -73,5 +146,21 @@ body {
   
   .analysis-data-layout {
     grid-template-columns: 1fr;
+  }
+  
+  .theme-toggle-btn {
+    top: 16px;
+    right: 16px;
+    width: 48px;
+    height: 48px;
+    font-size: 1.1rem;
+  }
+  
+  .app-header h1 {
+    font-size: 2.2rem;
+  }
+  
+  .app-header p {
+    font-size: 1rem;
   }
 }
